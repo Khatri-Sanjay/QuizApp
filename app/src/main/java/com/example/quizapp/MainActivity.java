@@ -3,6 +3,7 @@ package com.example.quizapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -93,11 +94,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             passStatus = "Failed";
         }
 
-        new AlertDialog.Builder(this)
-                .setTitle(passStatus)
-                .setMessage("Score is " +score+ " out of " +totalQuestions)
-                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz())
-                .show();
+//        new AlertDialog.Builder(this)
+//                .setTitle(passStatus)
+//                .setMessage("Score is " +score+ " out of " +totalQuestions)
+//                .setPositiveButton("Restart",(dialogInterface, i) -> restartQuiz())
+//                .show();
+
+        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+        intent.putExtra("passStatus", passStatus);
+        intent.putExtra("score", score);
+        intent.putExtra("totalQuestions", totalQuestions);
+        startActivity(intent);
     }
 
     void restartQuiz(){
